@@ -1,5 +1,6 @@
 import React from "react";
 import PostMailbox from "./components/Mailbox/PostMailbox";
+import ViewMailbox from "./components/Mailbox/ViewMailbox";
 function App() {
     return (
         <div className="App">
@@ -10,7 +11,7 @@ function App() {
                     </span>
                 </div>
             </nav>
-            <PostMailbox />
+            <ViewMailbox />
         </div>
     );
 }

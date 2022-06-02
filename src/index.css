@@ -15,3 +15,11 @@ code {
 .post {
   max-width: 600px;
 }
+
+.view_button {
+  vertical-align: baseline;
+}
+
+.view_select{
+  display: inline;
+}
