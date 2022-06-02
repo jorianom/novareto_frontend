@@ -1,70 +1,116 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const PostMailbox = () => {
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm();
+
+    const onSubmit = async (data) => {
+        console.log(data)
+    };
     const msg =
         "Gracias por su franqueza al   manifestarnos sus quejas o sugerencias, seguiremos esforzándonos por mejorar cada día nuestros procesos internos";
     return (
         <>
             <div className="container-fluid mt-5 post ">
-                <div class="mb-3">
-                    <label for="name" class="form-label">
-                        Nombre Completo :
-                    </label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="name"
-                        placeholder="Nombres y apellidos"
-                    />
-                </div>
-                <div class="mb-3">
-                    <label for="celular" class="form-label">
-                        Telefono o Celular :
-                    </label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="celular"
-                        placeholder="# Telefono o Celular"
-                    />
-                </div>
-                <div>
-                    <label class="form-label">Tipo de publicación :</label>
-                    <div class="form-check">
-                        <input
-                            class="form-check-input"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault1"
-                        />
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            Quejas
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">
+                            Nombre Completo :
                         </label>
-                    </div>
-                    <div class="form-check mb-3">
                         <input
-                            class="form-check-input"
-                            type="radio"
-                            name="flexRadioDefault"
-                            id="flexRadioDefault2"
-                            checked
+                            type="text"
+                            className="form-control"
+                            placeholder="Nombres y apellidos"
+                            {...register("name", { required: true })}
                         />
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            Sugerencia
-                        </label>
+                        {errors.name && <span>Este campo es obligatorio</span>}
                     </div>
-                </div>
-                <div class="mb-3">
-                    <label for="comments" class="form-label">
-                        Por favor, escriba sus sugerencias y comentarios :
-                    </label>
-                    <textarea class="form-control" id="comments" rows="5"></textarea>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">
-                        Enviar
-                    </button>
-                </div>
+                    <div className="mb-3">
+                        <label htmlFor="celular" className="form-label">
+                            Telefono o Celular :
+                        </label>
+                        <input
+                            type="text"
+                            {...register("celular")}
+                            className="form-control"
+                            id="celular"
+                            name="celular"
+                            placeholder="# Telefono o Celular"
+                        />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">
+                            Correo Electronico :
+                        </label>
+                        <input
+                            type="email"
+                            {...register("email", {
+                                required: true,
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: "invalid email address",
+                                },
+                            })}
+                            className="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="name@example.com"
+                        />
+                        {errors.email && errors.email.message}
+                    </div>
+                    <div>
+                        <label className="form-label">Tipo de publicación :</label>
+                        <div className="form-check">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                {...register("type", { required: true })}
+                                name="type"
+                                value="Queja"
+                            />
+                            <label className="form-check-label" htmlFor="type">
+                                Queja
+                            </label>
+                        </div>
+                        <div className="form-check mb-3">
+                            <input
+                                className="form-check-input"
+                                type="radio"
+                                {...register("type", { required: true })}
+                                name="type"
+                                value="Sugerencia"
+                            />
+                            <label className="form-check-label" htmlFor="type">
+                                Sugerencia
+                            </label>
+                        </div>
+                        {errors.type && <span>Este campo es obligatorio</span>}
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="comments" className="form-label">
+                            Por favor, escriba sus sugerencias y comentarios :
+                        </label>
+                        <textarea
+                            className="form-control"
+                            id="comments"
+                            {...register("comments", { required: true })}
+                            name="comments"
+                            rows="5"
+                        ></textarea>
+                        {errors.comments && <span>Este campo es obligatorio</span>}
+                    </div>
+                    <div className="col-auto">
+                        <input
+                            type="submit"
+                            className="btn btn-primary mb-3"
+                            value="Enviar"
+                        />
+                    </div>
+                </form>
             </div>
         </>
     );

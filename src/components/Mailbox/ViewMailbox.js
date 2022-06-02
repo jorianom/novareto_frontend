@@ -62,7 +62,7 @@ const ViewMailbox = () => {
                                                     class="modal-title"
                                                     id="exampleModalLabel"
                                                 >
-                                                    Modal title
+                                                    {item.type}
                                                 </h5>
                                                 <button
                                                     type="button"
@@ -71,14 +71,14 @@ const ViewMailbox = () => {
                                                     aria-label="Close"
                                                 ></button>
                                             </div>
-                                            <div class="modal-body">...</div>
+                                            <div class="modal-body">{item.name}</div>
                                             <div class="modal-footer">
                                                 <button
                                                     type="button"
                                                     class="btn btn-secondary"
                                                     data-bs-dismiss="modal"
                                                 >
-                                                    Close
+                                                    Cerrar
                                                 </button>
                                             </div>
                                         </div>
