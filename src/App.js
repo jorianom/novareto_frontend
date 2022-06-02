@@ -1,6 +1,7 @@
 import React from "react";
 import PostMailbox from "./components/Mailbox/PostMailbox";
 import ViewMailbox from "./components/Mailbox/ViewMailbox";
+import ModalMailbox from "./components/Mailbox/ModalMailbox";
 function App() {
     return (
         <div className="App">
