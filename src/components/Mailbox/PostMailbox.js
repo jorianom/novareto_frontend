@@ -23,7 +23,7 @@ const PostMailbox = () => {
         document.getElementById("form1").reset();
         setTimeout(() => {
             setError(true);
-        }, 5000);
+        }, 3000);
     };
 
     const msg =

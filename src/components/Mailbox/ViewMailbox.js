@@ -7,14 +7,32 @@ const ViewMailbox = () => {
     const [data, setData] = React.useState([]);
     const [mailbox, setMailbox] = React.useState({});
     const [filter, setFilter] = React.useState("");
+    const [error, setError] = React.useState({
+        error: false,
+        msg: "",
+    });
     Moment.locale("es");
 
     const getData = async () => {
-        const rta = await clienteAxios.get("api/mailbox");
-        if (filter === "") {
-            setData(rta.data.mailboxes);
-        } else {
-            setData(rta.data.mailboxes.filter((item) => item.type === filter));
+        try {
+            const rta = await clienteAxios.get("api/mailbox");
+            if (filter === "") {
+                setData(rta.data.mailboxes);
+            } else {
+                setData(rta.data.mailboxes.filter((item) => item.type === filter));
+            }
+        } catch (err) {
+            console.log(err);
+            setError({
+                error: true,
+                msg: "Error al obtener los datos",
+            });
+            setTimeout(() => {
+                setError({
+                    error: false,
+                    msg: "",
+                });
+            }, 5000);
         }
     };
 
@@ -25,6 +43,9 @@ const ViewMailbox = () => {
         <>
             <div className="container mt-5">
                 <h2 className="my-5">Visualizador de quejas y sugerencias</h2>
+                {error.error ? (
+                    <div className="alert alert-success">{error.msg}</div>
+                ) : null}
                 <div>
                     <select
                         onChange={(e) => setFilter(e.target.value)}
@@ -40,7 +61,7 @@ const ViewMailbox = () => {
                     <button
                         onClick={() => getData()}
                         type="submit"
-                        className="btn btn-info ms-2 view_button"
+                        className="btn btn-success ms-2 view_button"
                     >
                         Filtrar
                     </button>
@@ -67,6 +88,7 @@ const ViewMailbox = () => {
                                           className=""
                                           data-bs-toggle="modal"
                                           data-bs-target="#exampleModal"
+                                          href="#"
                                       >
                                           Ver más
                                       </a>
@@ -89,6 +111,10 @@ const ViewMailbox = () => {
                                                           <small>
                                                               Celular: {item.celular}
                                                           </small>
+                                                          <br />
+                                                          <small>
+                                                              Email: {item.email}
+                                                          </small>
                                                       </h6>
                                                       <button
                                                           type="button"
@@ -102,9 +128,7 @@ const ViewMailbox = () => {
                                                   </div>
                                                   <div className="modal-footer">
                                                       <small>
-                                                          {Moment(item.date).format(
-                                                              "ll"
-                                                          )}
+                                                          {Moment(item.date).format("ll")}
                                                       </small>
                                                       <button
                                                           type="button"

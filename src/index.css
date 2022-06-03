@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color:beige;
 }
 
 code {
@@ -29,4 +30,12 @@ code {
   margin-top: 0.25rem;
   font-size: .875em;
   color: #b80c0c;
+}
+
+.navbar-btn{
+  color:aliceblue;
+  border-color: azure;
+}
+.navbar-btn:hover{
+  border-color:rgb(126, 126, 245);
 }

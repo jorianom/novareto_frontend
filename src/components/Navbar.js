@@ -4,16 +4,16 @@ const Navbar = () => {
     const sampleLocation = useLocation();
     return (
         <>
-            <nav className="navbar bg-light">
+            <nav className="navbar navbar-dark bg-dark">
                 <div className="container-fluid">
                     <span className="navbar-brand mb-0 h1">
-                        Buzón de quejas y sugerencias
+                        Buzón
                     </span>
 
                     <Link
                         to={(sampleLocation.pathname === "/" ? "/view" : "/")}
                         type="button"
-                        className=" btn btn-outline-primary"
+                        className=" btn btn-outline-dark btn-sm navbar-btn"
                         aria-current="page"
                     >
                         {sampleLocation.pathname === "/"
