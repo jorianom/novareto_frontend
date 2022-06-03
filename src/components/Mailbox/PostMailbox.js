@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import clienteAxios from "../../config/clienteAxios";
 
 const PostMailbox = () => {
     const {
@@ -7,16 +8,32 @@ const PostMailbox = () => {
         register,
         formState: { errors },
     } = useForm();
-
+    const [error, setError] = React.useState(true);
     const onSubmit = async (data) => {
-        console.log(data)
+        console.log(data);
+        try {
+            await clienteAxios.post("api/mailbox/add", data);
+            setError(false);
+            clean();
+        } catch (err) {
+            console.log(err);
+        }
     };
+    const clean = () => {
+        document.getElementById("form1").reset();
+        setTimeout(() => {
+            setError(true);
+        }, 5000);
+    };
+
     const msg =
-        "Gracias por su franqueza al   manifestarnos sus quejas o sugerencias, seguiremos esforzándonos por mejorar cada día nuestros procesos internos";
+        "Gracias por su franqueza al manifestarnos sus quejas o sugerencias, seguiremos esforzándonos por mejorar cada día nuestros procesos internos";
     return (
         <>
             <div className="container-fluid mt-5 post ">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <h2 className="my-5">Publicar quejas y sugerencias</h2>
+                {!error ? <div className="alert alert-success">{msg}</div> : null}
+                <form id="form1" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">
                             Nombre Completo :
@@ -27,7 +44,9 @@ const PostMailbox = () => {
                             placeholder="Nombres y apellidos"
                             {...register("name", { required: true })}
                         />
-                        {errors.name && <span>Este campo es obligatorio</span>}
+                        {errors.name && (
+                            <span className="valid">Este campo es obligatorio</span>
+                        )}
                     </div>
                     <div className="mb-3">
                         <label htmlFor="celular" className="form-label">
@@ -60,7 +79,9 @@ const PostMailbox = () => {
                             name="email"
                             placeholder="name@example.com"
                         />
-                        {errors.email && errors.email.message}
+                        {errors.email && (
+                            <span className="valid">Este campo es obligatorio</span>
+                        )}
                     </div>
                     <div>
                         <label className="form-label">Tipo de publicación :</label>
@@ -88,10 +109,12 @@ const PostMailbox = () => {
                                 Sugerencia
                             </label>
                         </div>
-                        {errors.type && <span>Este campo es obligatorio</span>}
+                        {errors.type && (
+                            <span className="valid">Este campo es obligatorio</span>
+                        )}
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="comments" className="form-label">
+                        <label htmlFor=" " className="form-label">
                             Por favor, escriba sus sugerencias y comentarios :
                         </label>
                         <textarea
@@ -101,7 +124,9 @@ const PostMailbox = () => {
                             name="comments"
                             rows="5"
                         ></textarea>
-                        {errors.comments && <span>Este campo es obligatorio</span>}
+                        {errors.comments && (
+                            <span className="valid">Este campo es obligatorio</span>
+                        )}
                     </div>
                     <div className="col-auto">
                         <input

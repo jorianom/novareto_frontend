@@ -23,3 +23,10 @@ code {
 .view_select{
   display: inline;
 }
+
+.valid {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: .875em;
+  color: #b80c0c;
+}
