@@ -113,7 +113,7 @@ const ViewMailbox = () => {
                                                           </small>
                                                           <br />
                                                           <small>
-                                                              Email: {item.email}
+                                                              Correo: {item.email}
                                                           </small>
                                                       </h6>
                                                       <button

@@ -9,6 +9,7 @@ const PostMailbox = () => {
         formState: { errors },
     } = useForm();
     const [error, setError] = React.useState(true);
+    
     const onSubmit = async (data) => {
         console.log(data);
         try {
