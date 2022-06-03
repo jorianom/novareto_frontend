@@ -1,3 +1,7 @@
+# novareto_frontend
+## Deployment
+[https://novareto-frontend.vercel.app/](https://novareto-frontend.vercel.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
